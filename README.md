@@ -1,4 +1,4 @@
-Use Jarl with [`pre-commit`](https://pre-commit.com/) or [prek](https://prek.j178.dev/).
+Use Jarl with [pre-commit](https://pre-commit.com/) or [prek](https://prek.j178.dev/).
 
 ## Quick start
 
