@@ -1,0 +1,42 @@
+name: Update jarl version
+
+on:
+  repository_dispatch:
+    types: [jarl-release]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update version in jarl-check.sh
+        env:
+          NEW_VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          sed -i "s/^VERSION=\".*\"/VERSION=\"${NEW_VERSION}\"/" jarl-check.sh
+          echo "Updated to jarl ${NEW_VERSION}"
+          grep '^VERSION=' jarl-check.sh
+
+      - name: Commit, tag, and push
+        env:
+          NEW_VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add jarl-check.sh
+          git commit -m "Update jarl to ${NEW_VERSION}"
+          git tag "${NEW_VERSION}"
+          git push origin main --tags
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEW_VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          gh release create "${NEW_VERSION}" \
+            --title "jarl ${NEW_VERSION}" \
+            --notes "Update jarl to [${NEW_VERSION}](https://github.com/etiennebacher/jarl/releases/tag/${NEW_VERSION})"
