@@ -4,7 +4,7 @@
   entry: jarl check
   language: system
   files: \.(R|r|Rmd|rmd|qmd)$
-  args: [.]
+  args: []
   require_serial: true
   additional_dependencies: []
   minimum_pre_commit_version: "4.4.0"
