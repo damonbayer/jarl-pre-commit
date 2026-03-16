@@ -8,7 +8,7 @@ Use this in `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
--   repo: https://github.com/damonbayer/jarl-pre-commit
+-   repo: https://github.com/etiennebacher/jarl-pre-commit
     rev: 0.4.0
     hooks:
       - id: jarl-check
@@ -22,7 +22,7 @@ Use this in `prek.toml`:
 
 ```toml
 [[repos]]
-repo = "https://github.com/damonbayer/jarl-pre-commit"
+repo = "https://github.com/etiennebacher/jarl-pre-commit"
 rev = "0.4.0"
 hooks = [
   { id = "jarl-check" },
