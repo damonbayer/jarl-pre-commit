@@ -1,0 +1,10 @@
+# Downloaded jarl binaries (fetched during hook installation)
+jarl_pre_commit/jarl
+jarl_pre_commit/jarl.exe
+
+# Python build artifacts
+*.egg-info/
+dist/
+build/
+__pycache__/
+*.pyc
