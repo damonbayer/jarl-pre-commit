@@ -61,7 +61,7 @@ def _download_jarl():
                 z.extractall(tmpdir)
         else:
             with tarfile.open(archive) as t:
-                t.extractall(tmpdir)
+                t.extractall(tmpdir, filter="data")
 
         src = os.path.join(tmpdir, f"jarl-{target}", binary_name)
         shutil.copy2(src, dst)
