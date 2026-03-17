@@ -1,7 +1,7 @@
 # This workflow is triggered by a new release in Jarl.
 # It does two things:
-# 1. update the `VERSION` in `jarl-check.sh` and `setup.py`. This corresponds
-#    to the version of Jarl to download during hook installation.
+# 1. update the `VERSION` in `setup.py`. This corresponds to the version
+#    of Jarl to download during hook installation.
 # 2. make a new tag corresponding to `VERSION`.
 #
 # Example:
@@ -28,14 +28,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update version in jarl-check.sh and setup.py
+      - name: Update version in setup.py
         env:
           NEW_VERSION: ${{ github.event.client_payload.version }}
         run: |
-          sed -i "s/^VERSION=\".*\"/VERSION=\"${NEW_VERSION}\"/" jarl-check.sh
           sed -i "s/^VERSION = \".*\"/VERSION = \"${NEW_VERSION}\"/" setup.py
           echo "Updated to jarl ${NEW_VERSION}"
-          grep '^VERSION' jarl-check.sh setup.py
+          grep '^VERSION' setup.py
 
       - name: Commit, tag, and push
         env:
@@ -43,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add jarl-check.sh setup.py
+          git add setup.py
           git commit -m "Update jarl to ${NEW_VERSION}"
           git tag "${NEW_VERSION}"
           git push origin main --tags
