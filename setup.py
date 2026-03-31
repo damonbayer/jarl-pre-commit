@@ -11,7 +11,7 @@ from pathlib import Path
 from setuptools import setup
 from setuptools.command.build_py import build_py
 
-VERSION = "0.4.0"
+VERSION = "0.5.0"
 
 PACKAGE_DIR = Path(__file__).parent / "jarl_pre_commit"
 
